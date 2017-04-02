@@ -41,3 +41,30 @@ app.post('/', (req, res) => {
   });
 
 });
+
+app.get('/slack', (req, res) => {
+
+  const data = {
+    form: {
+      client_id: process.env.SLACK_CLIENT_ID,
+      client_secret: process.env.SLACK_CLIENT_SECRET,
+      code: req.query.code,
+    },
+  };
+
+
+  request.post('https://slack.com/api/oauth.access', data, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      // You are done.
+      // If you want to get team info, you need to get the token here
+      let token = JSON.parse(body).access_token; // Auth token
+
+      request.post('https://slack.com/api/team.info', {form: {token: token}}, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+          let team = JSON.parse(body).team.domain;
+          res.redirect(`http://${team}.slack.com`);
+        }
+      });
+    }
+  });
+});
