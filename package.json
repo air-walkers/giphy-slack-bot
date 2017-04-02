@@ -1,0 +1,27 @@
+{
+  "name": "giphy-slack-bot",
+  "version": "1.0.0",
+  "description": "Slack bot integrated with the Giphy API",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "1.17.1",
+    "express": "4.15.2",
+    "request": "2.81.0"
+  },
+  "devDependencies": {
+    "nodemon": "1.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/air-walkers/giphy-slack-bot.git"
+  },
+  "author": "Matthew Burfield <burfie@hotmail.com> (https://matthew-burfield.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/air-walkers/giphy-slack-bot/issues"
+  },
+  "homepage": "https://github.com/air-walkers/giphy-slack-bot#readme"
+}
