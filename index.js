@@ -32,10 +32,8 @@ app.post('/', (req, res) => {
 
       const data = {
         response_type: 'in_channel',
-        text: searchString,
-        mrkdwn: true,
         attachments: [
-          {image_url: body.data.fixed_height_small_url}
+          {image_url: body.data.fixed_height_downsampled_url}
         ],
       };
       res.json(data); // Print the json response
