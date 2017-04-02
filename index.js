@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 
+const PUBLIC_BETA_KEY = "dc6zaTOxFJmzC";
+const URL = "http://api.giphy.com/v1/gifs/random?api_key=" + PUBLIC_BETA_KEY;
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,5 +18,28 @@ const server = app.listen(process.env.PORT || 8080, () => {
 });
 
 app.post('/', (req, res) => {
-    console.log(req.body.text);
-})
+
+  const searchString = req.body.text.replace(/\s/g, '+');
+  let finalUrl = URL + "&tag=" + searchString;
+
+  request({
+    url: finalUrl,
+    json: true
+  }, function (error, response, body) {
+
+    if (!error && response.statusCode === 200) {
+
+
+      const data = {
+        response_type: 'in_channel',
+        text: searchString,
+        mrkdwn: true,
+        attachments: [
+          {image_url: body.data.fixed_height_small_url}
+        ],
+      };
+      res.json(data); // Print the json response
+    }
+  });
+
+});
