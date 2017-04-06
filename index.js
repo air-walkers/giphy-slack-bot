@@ -106,7 +106,22 @@ const getData = (body, type) => {
     response_type: getResponseType(type),
     attachments: getAttachments(body, type),
   };
-}
+};
+
+
+const getHelpData = () => {
+  let text = "*Giphy Bot*\n";
+  text += "/gif -help, Brings up the help, were you are right now.\n";
+  text += "/gif [search term], Will return a random GIF related to your search term.\n";
+  text += "/gif -s [search term], Will return the specific GIF that matches your search term.\n"
+  text += "/gif -t, Will return the top 10 trending GIFs privately so only you can see them.\n"
+  text += "\n";
+  text += "This bot was built with :heart: by Jay and Matt."
+  return {
+    text,
+    mrkdwn: true,
+  };
+};
 
 app.post('/', (req, res) => {
   
@@ -117,10 +132,8 @@ app.post('/', (req, res) => {
   const type = getType(match);
 
   if (type === 'help') {
-    res.json({
-      text: "This is the help menu. blah blah blah",
-    });
-    return;
+    res.json(getHelpData());
+    return
   }
   
   const finalUrl = search(searchString, type, match);
