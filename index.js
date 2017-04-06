@@ -25,61 +25,107 @@ const cleanSearch = (text,match) => {
   
 };
 
+const getParams = (text, type, searchString) => {
+  switch (type) {
+    case "search":
+      return "&limit=1&q=" + searchString;
+    case "trending":
+      return "&limit=10";
+    default:
+      return "&tag=" + searchString; // random
+  }
+}
+
 const search = function(text, type, match){
     
-    //using GIPHY public api key, change when in production
-    const URL = "http://api.giphy.com/v1/gifs/" + type + "?api_key=dc6zaTOxFJmzC";
-    const searchString = cleanSearch(text,match);
-    return URL + "&tag=" + searchString;
+  //using GIPHY public api key, change when in production
+  const searchString = cleanSearch(text,match);
+  const params = getParams(text, type, searchString);
+
+  const URL = "http://api.giphy.com/v1/gifs/" + type + "?api_key=dc6zaTOxFJmzC" + params;
+  return URL;
   
 };
 
-const getType = (text, match)  => {
+const getType = (match)  => {
   
-  if(match === "-t "){ // include a space after to ensure it was a command
-      
+  // match is an object. We need to coerse it to a string
+  console.log(`"${String(match).replace(' ', '')}"`)
+  switch (String(match).replace(' ', '')) {
+    case "-t":
       return "trending";
-    
-  } else if(match === "-s ") { // include a space after to ensure it was a command
-    
+
+    case "-s":
       return "search";
-    
-  }else {
-    
+
+    case "-help":
+      return "help";
+
+    default:
       return "random";
-    
   }
   
 };
 
+const getAttachments = (body, type) => {
+
+  // trending will return an array of image urls, everything else is just a single image url.
+  if (type === 'trending') {
+    return body.data.map(gif => ({ image_url: gif.images.fixed_height_downsampled.url }));
+  }
+  
+  return [{ image_url: getImageUrl(body, type) }];
+}
+
 const getImageUrl = (body, type) => {
   
-    if(type === "search"){
-      
-        return body.data[0].fixed_height_downsampled_url;
-        
-    } else if (type === "trending"){
-    //make an array of top 10 images  
-        
-        
-      
-    } else {
-      
-      return body.data.fixed_height_downsampled_url;
-      
+    if (type === "search") {
+      return body.data[0].images.fixed_height_downsampled.url;
     }
+
+    // random
+    return body.data.fixed_height_downsampled_url;
   
+}
+
+const getResponseType = (type) => {
+  if (type === 'trending') {
+    return 'ephemeral';
+  }
+  return 'in_channel';
+}
+
+const getData = (body, type) => {
+  if (body.data.length === 0) {
+    return ({
+      text: "Sorry, your search returned 0 results. ",
+    });
+  }
+
+  return {
+    response_type: getResponseType(type),
+    attachments: getAttachments(body, type),
+  };
 }
 
 app.post('/', (req, res) => {
   
   const searchString = req.body.text.toLowerCase();
   
-  const match = searchString.match(/^-[ts]\s/);
+  const match = searchString.match(/^-s\s|^-t|-help/);
   
-  const type = getType(searchString,match);
+  const type = getType(match);
+
+  if (type === 'help') {
+    res.json({
+      text: "This is the help menu. blah blah blah",
+    });
+    return;
+  }
   
   const finalUrl = search(searchString, type, match);
+
+  console.log(finalUrl);
 
   request({
     url: finalUrl,
@@ -88,13 +134,10 @@ app.post('/', (req, res) => {
 
     if (!error && response.statusCode === 200) {
     //response ok
-    
-      const data = {
-        response_type: 'in_channel',
-        attachments: [
-          {image_url: body.data.fixed_height_downsampled_url}
-        ],
-      };
+      // console.log(`type: ${type}; image: ${getImageUrl(body, type)}`);
+      console.log(getResponseType(type), type);
+
+      const data = getData(body, type);
       
       res.json(data); // Print the json response
       
