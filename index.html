@@ -1,131 +1,47 @@
 <!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Helios by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body class="homepage">
-		<div id="page-wrapper">
+<html lang="en">
 
-			<!-- Header -->
-				<div id="header">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Slack Giphy Bot</title>
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
 
-					<!-- Inner -->
-						<div class="inner">
-							<header>
-								<h1><a href="index.html" id="logo">GIF SLACK BOT</a></h1>
-								<hr />
-								<p><!--[-->Share hilarious gifs with your team<!--]--></p>
-							</header>
-							<footer>
-								<a href="https://slack.com/oauth/authorize?scope=commands&client_id=159155871142.163928044679"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
-							</footer>
-						</div>
+<body>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Giphy Slack Bot</h1>
+      <p>Sharing animated GIF's with your team mates on Slack has never been more easy. Just add the Giphy Slack Bot to your team and post a GIF of your choice or a random one. You can also see the trending GIF's at this moment.</p>
+      <p>Get the Giphy Slack bot now.</p>
+      <a href="https://slack.com/oauth/authorize?scope=commands&client_id=159155871142.163928044679"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+    </div>
+  </div>
+  <div class="container" id="screenshot">
+    <img class="img-responsive" src="http://res.cloudinary.com/dettjqo9j/image/upload/c_scale,w_800/v1491551109/giphy-bot-screenshot_ah8n1g.png" alt="Giphy Slack Bot Screenshot" />
+  </div>
+  <div class="container" id="how-to">
+    <div class="container">
+      <h1>How to use</h1>
+      <br>
+      <p><code>/gif</code> <em>shows a&nbsp;random&nbsp;GIF</em></p>
+      <p><code>/gif [category]</code> <em>shows a random GIF for the specified category</em></p>
+      <p><code>/gif -s [search]</code> <em>shows a specific GIF that matches the search term</em></p>
+      <p><code>/gif -t</code> <em>shows the top 10 trending GIF's at the moment</em></p>
+      <p><code>/gif help</code> <em>shows list of&nbsp; available commands</em></p>
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li><a href="index.html#features">Commands</a></li>
-							</ul>
-						</nav>
+    </div>
+  </div>
+  <footer>
+    <div class="container">
+      <p>
+        Copyright © Giphy Slack Bot. All Rights Reserved. Made by The Air Walkers
+      </p>
+    </div>
+  </footer>
+</body>
 
-				</div>
-
-			<!-- Features -->
-				<div class="wrapper style1">
-
-					<section id="features" class="container special">
-						<header>
-							<h2>Morbi ullamcorper et varius leo lacus</h2>
-							<p>Ipsum volutpat consectetur orci metus consequat imperdiet duis integer semper magna.</p>
-						</header>
-						<div class="row">
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">/gif [search term]</a></h3>
-								</header>
-								<p>Show a random gif to your team with an options search term.</p>
-								<p><b>/gif</b> <i>(will display a completely random gif)</i></p>
-								<p><b>/gif basketball</b> <i>(will display a random basketball gif)</i></p>
-							</article>
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">/gif -s [search term]</a></h3>
-								</header>
-								<p>Show a specific gif to your team. Shows the gif that matches your search term.</p>
-								<p><b>/gif -s jazz jack rabbit</b> <i>(will display the gif the exactly matches the search jazz jack rabbit)</i></p>
-							</article>
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">/gif -t</a></h3>
-								</header>
-								<p>displays the top 10 trending gifs privately. We don't show everyone all 10 because it would clog up your group chat</p>
-							</article>
-						</div>
-					</section>
-
-				</div>
-
-			<!-- Footer -->
-				<div id="footer">
-					<div class="container">
-						<hr />
-						<div class="row">
-							<div class="12u">
-
-								<!-- Contact -->
-									<section class="contact">
-										<header>
-											<h3>Nisl turpis nascetur interdum?</h3>
-										</header>
-										<p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
-										<ul class="icons">
-											<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-											<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-											<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-											<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-											<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-											<li><a href="#" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
-										</ul>
-									</section>
-
-								<!-- Copyright -->
-									<div class="copyright">
-										<ul class="menu">
-											<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-										</ul>
-									</div>
-
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-		</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.onvisible.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-
-	</body>
 </html>

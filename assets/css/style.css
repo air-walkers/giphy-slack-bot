@@ -1,0 +1,34 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.jumbotron {
+  background-image: url('http://res.cloudinary.com/dettjqo9j/image/upload/v1491550233/Elegant_Background-6_rp1oyj.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: white !important;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+#screenshot {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#how-to {
+  background-image: url('http://res.cloudinary.com/dettjqo9j/image/upload/v1491551674/geometry2_rznhcw.png');
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 100%;
+}
+
+footer {
+  background-color: #bdc3c7;
+  color: white;
+  bottom: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 100%;
+  font-size: 0.9em;
+}
