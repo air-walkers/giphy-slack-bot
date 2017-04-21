@@ -125,9 +125,6 @@ const getHelpData = () => {
 
 app.post('/', (req, res) => {
   
-  if (!req.body.text) {
-    return;
-  }
   const searchString = req.body.text.toLowerCase();
   
   const match = searchString.match(/^-s\s|^-t|-help/);
@@ -177,20 +174,6 @@ app.get('/slack/oauth', (req, res) => {
   };
 
   console.log(process.env.SLACK_CLIENT_ID);
-
-  // app.get("/slack/oauth", function(req, res){
-  //   var data = {form: {
-  //       client_id: process.env.PORTAL_CLIENT_ID,
-  //       client_secret: process.env.PORTAL_CLIENT_SECRET,
-  //       code: req.query.code
-  //   }};
-  //   request.post('https://slack.com/api/oauth.access', data, function (error, response, body) {
-  //       if (!error && response.statusCode == 200) {
-  //           var token = JSON.parse(body).access_token;
-            
-  //       }
-  //   });
-  //});
 
 
   request.post('https://slack.com/api/oauth.access', data, (error, response, body) => {
