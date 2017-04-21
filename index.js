@@ -50,7 +50,7 @@ const search = function(text, type, match){
 const getType = (match)  => {
   
   // match is an object. We need to coerse it to a string
-  console.log(`"${String(match).replace(' ', '')}"`)
+  //console.log(`"${String(match).replace(' ', '')}"`)
   switch (String(match).replace(' ', '')) {
     case "-t":
       return "trending";
@@ -138,7 +138,7 @@ app.post('/', (req, res) => {
   
   const finalUrl = search(searchString, type, match);
 
-  console.log(finalUrl);
+  //console.log(finalUrl);
 
   request({
     url: finalUrl,
@@ -148,7 +148,7 @@ app.post('/', (req, res) => {
     if (!error && response.statusCode === 200) {
     //response ok
       // console.log(`type: ${type}; image: ${getImageUrl(body, type)}`);
-      console.log(getResponseType(type), type);
+      //console.log(getResponseType(type), type);
 
       const data = getData(body, type);
       
@@ -173,7 +173,7 @@ app.get('/slack/oauth', (req, res) => {
     },
   };
 
-  console.log(process.env.SLACK_CLIENT_ID);
+  //console.log(process.env.SLACK_CLIENT_ID);
 
 
   request.post('https://slack.com/api/oauth.access', data, (error, response, body) => {
@@ -181,7 +181,7 @@ app.get('/slack/oauth', (req, res) => {
       // You are done.
       // If you want to get team info, you need to get the token here
       let token = JSON.parse(body).access_token; // Auth token
-      console.log(token);
+      //console.log(token);
 
       request.post('https://slack.com/api/team.info', {form: {token: token}}, (error, response, body) => {
         if (!error && response.statusCode == 200) {
