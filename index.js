@@ -125,6 +125,9 @@ const getHelpData = () => {
 
 app.post('/', (req, res) => {
   
+  if (!req.body.text) {
+    return;
+  }
   const searchString = req.body.text.toLowerCase();
   
   const match = searchString.match(/^-s\s|^-t|-help/);
@@ -160,8 +163,11 @@ app.post('/', (req, res) => {
 
 });
 
-app.get('/slack', (req, res) => {
-
+app.get('/slack/oauth', (req, res) => {
+  if (!req.query.code) { // access denied
+    res.redirect('air-walkers.github.io/giphy-slack-bot/');
+    return;
+  }
   const data = {
     form: {
       client_id: process.env.SLACK_CLIENT_ID,
@@ -170,17 +176,38 @@ app.get('/slack', (req, res) => {
     },
   };
 
+  console.log(process.env.SLACK_CLIENT_ID);
+
+  // app.get("/slack/oauth", function(req, res){
+  //   var data = {form: {
+  //       client_id: process.env.PORTAL_CLIENT_ID,
+  //       client_secret: process.env.PORTAL_CLIENT_SECRET,
+  //       code: req.query.code
+  //   }};
+  //   request.post('https://slack.com/api/oauth.access', data, function (error, response, body) {
+  //       if (!error && response.statusCode == 200) {
+  //           var token = JSON.parse(body).access_token;
+            
+  //       }
+  //   });
+  //});
+
 
   request.post('https://slack.com/api/oauth.access', data, (error, response, body) => {
     if (!error && response.statusCode == 200) {
       // You are done.
       // If you want to get team info, you need to get the token here
       let token = JSON.parse(body).access_token; // Auth token
+      console.log(token);
 
       request.post('https://slack.com/api/team.info', {form: {token: token}}, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-          let team = JSON.parse(body).team.domain;
-          res.redirect(`http://${team}.slack.com`);
+          if(JSON.parse(body).error == 'missing_scope') {
+            res.send('Gif has been added to your team!');
+          } else {
+            let team = JSON.parse(body).team.domain;
+            res.redirect(`http://${team}.slack.com/apps/manage`);
+          }
         }
       });
     }
